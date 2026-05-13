@@ -1,0 +1,32 @@
+{
+  "name": "見た目年齢 × 貫禄ラボ",
+  "short_name": "見た目年齢",
+  "description": "見た目年齢と貫禄を5項目でエンタメ推定するラボ",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f1117",
+  "theme_color": "#0f1117",
+  "lang": "ja",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
