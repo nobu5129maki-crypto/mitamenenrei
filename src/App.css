@@ -225,6 +225,80 @@
   color: var(--muted);
 }
 
+.tips-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 720px) {
+  .tips-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.tips-card {
+  border-radius: 14px;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--line);
+}
+
+.tips-younger {
+  background: linear-gradient(165deg, rgba(125, 211, 252, 0.08), transparent);
+}
+
+.tips-grav {
+  background: linear-gradient(165deg, rgba(251, 191, 36, 0.08), transparent);
+}
+
+.tips-title {
+  margin: 0 0 0.4rem;
+  font-size: 1.02rem;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.tips-sub {
+  margin: 0 0 0.85rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.tips-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tips-list li {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.tips-list strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.tips-list li span {
+  display: block;
+}
+
+.tips-disclaimer {
+  margin: 1rem 0 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
 .foot {
   margin-top: 2rem;
   font-size: 0.8rem;

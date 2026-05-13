@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import './App.css'
 import { analyzePortrait, type AnalysisResult } from './lib/analyze'
 import { loadFaceModels } from './lib/faceEngine'
+import { LOOK_YOUNGER_SECTION, SHOW_GRAVITAS_SECTION } from './lib/afterResultTips'
 import { DIMENSION_LABELS } from './lib/scoring'
 
 type Status =
@@ -288,6 +289,36 @@ export default function App() {
               <Bar key={`g-${label}`} label={label} value={result.G[i]!} hint={G_HINTS[i]!} />
             ))}
           </div>
+
+          <div className="tips-grid">
+            <div className="tips-card tips-younger">
+              <h2 className="tips-title">{LOOK_YOUNGER_SECTION.title}</h2>
+              <p className="tips-sub">{LOOK_YOUNGER_SECTION.subtitle}</p>
+              <ul className="tips-list">
+                {LOOK_YOUNGER_SECTION.items.map((item) => (
+                  <li key={item.head}>
+                    <strong>{item.head}</strong>
+                    <span>{item.body}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="tips-card tips-grav">
+              <h2 className="tips-title">{SHOW_GRAVITAS_SECTION.title}</h2>
+              <p className="tips-sub">{SHOW_GRAVITAS_SECTION.subtitle}</p>
+              <ul className="tips-list">
+                {SHOW_GRAVITAS_SECTION.items.map((item) => (
+                  <li key={item.head}>
+                    <strong>{item.head}</strong>
+                    <span>{item.body}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <p className="tips-disclaimer">
+            上記は生活習慣・撮影・振る舞いの一般的なヒントであり、医療行為や美容の効果を保証するものではありません。
+          </p>
         </section>
       )}
 
