@@ -45,6 +45,14 @@
   color: var(--ink);
 }
 
+.error-block {
+  margin: 0 0 1rem;
+}
+
+.error-block .error {
+  margin-bottom: 0.75rem;
+}
+
 .error {
   background: rgba(248, 113, 113, 0.12);
   color: #fecaca;

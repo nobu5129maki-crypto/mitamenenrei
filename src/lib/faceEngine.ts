@@ -1,20 +1,26 @@
 import * as faceapi from 'face-api.js'
 
-const MODEL_URL = 'https://justadudewhohacks.github.io/face-api.js/models'
+/** Same-origin weights from `public/models` (served under Vite `BASE_URL`). */
+const MODEL_URI = `${import.meta.env.BASE_URL}models`
 
-let loading: Promise<void> | null = null
+let loadPromise: Promise<void> | null = null
+let weightsLoaded = false
 
 export function loadFaceModels(): Promise<void> {
-  if (!loading) {
-    loading = (async () => {
+  if (weightsLoaded) return Promise.resolve()
+  if (!loadPromise) {
+    loadPromise = (async () => {
       await Promise.all([
-        faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
-        faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
-        faceapi.nets.ageGenderNet.loadFromUri(MODEL_URL),
+        faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URI),
+        faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URI),
+        faceapi.nets.ageGenderNet.loadFromUri(MODEL_URI),
       ])
-    })()
+      weightsLoaded = true
+    })().finally(() => {
+      loadPromise = null
+    })
   }
-  return loading
+  return loadPromise
 }
 
 export function runDetection(

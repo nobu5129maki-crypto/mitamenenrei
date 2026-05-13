@@ -58,6 +58,23 @@ export default function App() {
   const [result, setResult] = useState<AnalysisResult | null>(null)
   const [useCamera, setUseCamera] = useState(false)
 
+  const retryLoadModels = useCallback(() => {
+    setStatus({ kind: 'loading-models' })
+    loadFaceModels()
+      .then(() => {
+        setModelsLoaded(true)
+        setStatus({ kind: 'ready' })
+      })
+      .catch(() => {
+        setModelsLoaded(false)
+        setStatus({
+          kind: 'error',
+          message:
+            'モデルの読み込みに失敗しました。通信が不安定な場合は「モデルを再読み込み」を試すか、ページを更新してください。',
+        })
+      })
+  }, [])
+
   useEffect(() => {
     let cancelled = false
     loadFaceModels()
@@ -68,11 +85,14 @@ export default function App() {
         }
       })
       .catch(() => {
-        if (!cancelled)
+        if (!cancelled) {
+          setModelsLoaded(false)
           setStatus({
             kind: 'error',
-            message: 'モデルの読み込みに失敗しました。ネット接続を確認してください。',
+            message:
+              'モデルの読み込みに失敗しました。通信が不安定な場合は「モデルを再読み込み」を試すか、ページを更新してください。',
           })
+        }
       })
     return () => {
       cancelled = true
@@ -190,9 +210,14 @@ export default function App() {
         <p className="notice">AIモデルを読み込み中…（初回は数十秒かかることがあります）</p>
       )}
       {status.kind === 'error' && (
-        <p className="error" role="alert">
-          {status.message}
-        </p>
+        <div className="error-block" role="alert">
+          <p className="error">{status.message}</p>
+          {!modelsLoaded && (
+            <button type="button" className="btn secondary" onClick={retryLoadModels}>
+              モデルを再読み込み
+            </button>
+          )}
+        </div>
       )}
 
       <section className="panel controls">
